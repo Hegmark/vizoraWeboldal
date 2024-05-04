@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { RouterOutlet } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-reader-regist',
@@ -22,10 +23,11 @@ export class ReaderRegistComponent {
     })
   });
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authService: AuthService) { }
 
   onSubmit() {
-    //TODO login logika
-    this.router.navigate(['reader-list']);
+    this.authService.register(this.signUpForm.get('email')?.value, this.signUpForm.get("password")?.value).then(cred => {
+      this.router.navigate(['reader-list']);
+    })
   }
 }

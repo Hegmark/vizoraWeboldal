@@ -1,0 +1,11 @@
+{
+  "hosting": [
+    {
+      "target": "vizora-webapp",
+      "source": ".",
+      "frameworksBackend": {
+        "region": "europe-west1"
+      }
+    }
+  ]
+}

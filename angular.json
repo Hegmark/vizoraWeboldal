@@ -93,6 +93,23 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "version": 2
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "vizora-webapp:build:production",
+              "serveTarget": "vizora-webapp:serve:production"
+            },
+            "development": {
+              "buildTarget": "vizora-webapp:build:development",
+              "serveTarget": "vizora-webapp:serve:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }

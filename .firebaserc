@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "vizora-weboldal": {
+      "hosting": {
+        "vizora-webapp": [
+          "vizora-weboldal"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "vizora-weboldal"
+  }
+}
