@@ -23,8 +23,9 @@ export class ReaderLoginComponent {
   onSubmit() {
     this.authService.login(this.loginForm.get('email')?.value, this.loginForm.get("password")?.value).then(cred => {
       this.router.navigate(['reader-list']);
+    }).catch(error => {
+      alert(error.message)
     })
-
   }
   register() {
     this.router.navigate(['reader-register']);

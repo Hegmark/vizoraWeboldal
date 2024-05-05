@@ -21,15 +21,6 @@ export const appConfig: ApplicationConfig = {
     "messagingSenderId": "440355443959",
     "measurementId": "G-7V2MHBGKWE"
   })),
-  /*importProvidersFrom(provideFirebaseApp(() => initializeApp({
-    "projectId": "vizora-weboldal",
-    "appId": "1:440355443959:web:be3aa20368776e9888eff2",
-    "storageBucket": "vizora-weboldal.appspot.com",
-    "apiKey": "AIzaSyCUx3JOD85W5jcnPUFnE2B6T8LFcsRxRiE",
-    "authDomain": "vizora-weboldal.firebaseapp.com",
-    "messagingSenderId": "440355443959",
-    "measurementId": "G-7V2MHBGKWE"
-  }))),*/
   importProvidersFrom(provideAuth(() => getAuth())), importProvidersFrom(provideFirestore(() => getFirestore())),
   importProvidersFrom(provideStorage(() => getStorage()))
   ]
