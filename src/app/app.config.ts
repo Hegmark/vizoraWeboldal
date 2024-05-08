@@ -22,6 +22,6 @@ export const appConfig: ApplicationConfig = {
     "measurementId": "G-7V2MHBGKWE"
   })),
   importProvidersFrom(provideAuth(() => getAuth())), importProvidersFrom(provideFirestore(() => getFirestore())),
-  importProvidersFrom(provideStorage(() => getStorage()))
+  importProvidersFrom(provideStorage(() => getStorage())),
   ]
 };

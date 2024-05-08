@@ -1,4 +1,4 @@
-import { AuthService } from './auth.service';
+import { AuthService } from '../auth/auth.service';
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 
@@ -10,9 +10,9 @@ export class AuthGuard implements CanActivate {
   constructor(private auth: AuthService, private router: Router) {}
 
   canActivate(): boolean {
-    if(this.auth.getUser()){
+    if(sessionStorage.getItem("uid") !== null){
       return true
     }
     return false;
   }
-}
+} 

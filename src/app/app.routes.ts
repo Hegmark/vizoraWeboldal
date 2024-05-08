@@ -9,7 +9,7 @@ import { CivilDataComponent } from './pages/civil-data/civil-data.component';
 import { ErrorComponent } from './pages/error/error.component';
 import { ReaderListComponent } from './pages/reader-list/reader-list.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { AuthGuard } from './services/guard.guard';
+import { AuthGuard } from './services/guard/guard.guard';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },

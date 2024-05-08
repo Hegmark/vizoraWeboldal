@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { RouterOutlet } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
+import { User } from '../../models/userInterface';
+import { AuthGuard } from '../../services/guard/guard.guard';
 
 @Component({
   selector: 'app-reader-regist',
@@ -23,15 +25,34 @@ export class ReaderRegistComponent {
     })
   });
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService, private authG: AuthGuard) { }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.signUpForm.get('password')?.value == this.signUpForm.get('rePassword')?.value) {
-      this.authService.register(this.signUpForm.get('email')?.value, this.signUpForm.get("password")?.value).then(cred => {
-        this.router.navigate(['reader-list']);
-      }).catch(error => {
-        alert(error.message)
-      })
+      const user: User = {
+        email: this.signUpForm.get("email")?.value as string,
+        firstName: this.signUpForm.get("name.firstname")?.value as string,
+        lastName: this.signUpForm.get("name.lastname")?.value as string,
+      }
+      try {
+        /*await (this.authService.register(user, this.signUpForm.get('password')?.value as string).then((success) => {
+          console.log(success)
+          if (success === true) {
+            this.router.navigate(['reader-list']);
+          } else {
+            throw new Error(success)
+          }
+        }))*/
+        const success = await (this.authService.register(user, this.signUpForm.get('password')?.value as string))
+        if (this.authG.canActivate()) {
+          this.router.navigate(['reader-list']);
+        } else {
+          throw new Error(success)
+        }
+      } catch (error: any) {
+        console.log(error)
+        alert(error)
+      }
     } else {
       alert("Jelszavak nem egyeznek!");
     }
