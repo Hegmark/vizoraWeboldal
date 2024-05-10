@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AddressListComponent } from '../../components/address-list/address-list.component';
 import { DAOService } from '../../services/DAO/dao.service';
-import { Reading } from '../../models/readingInterface';
+import { Router } from '@angular/router';
+import { Address } from '../../models/addressInterface';
 
 @Component({
   selector: 'app-reader-list',
@@ -12,12 +13,16 @@ import { Reading } from '../../models/readingInterface';
 })
 export class ReaderListComponent implements OnInit{
 
-  data?:Array<Reading>;
-  constructor(private dao: DAOService){}
+  data?:Array<Address>;
+  constructor(private dao: DAOService, private router:Router){}
 
   ngOnInit(): void{
-    this.dao.getAllReadings().subscribe((data: Array<Reading>) =>{
+    this.dao.getAllAddresses().subscribe((data: Array<Address>) =>{
       this.data = data;
     })
+  }
+
+  navToCreate(){
+    this.router.navigate(['address-register']);
   }
 }

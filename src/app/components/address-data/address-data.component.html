@@ -1,27 +1,31 @@
-<form [formGroup]='addressForm' (ngSubmit)="onSubmit()">
-    <div>
-      <label for="cityCode">City Code:</label>
-      <input type="text" formControlName="cityCode">
-    </div>
-    <div>
-      <label for="cityName">City Name:</label>
-      <input type="text" formControlName="cityName">
-    </div>
-    <div>
-      <label for="street">Street:</label>
-      <input type="text" formControlName="street">
-    </div>
-    <div>
-      <label for="houseNumber">House Number:</label>
-      <input type="text" formControlName="houseNumber">
-    </div>
-    <div>
-      <label for="apartmentNumber">Apartment Number:</label>
-      <input type="text" formControlName="apartmentNumber">
-    </div>
-    <div>
-      <label for="amount">Amount:</label>
-      <input type="number" formControlName="amount">
-    </div>
-    <button type="submit" [disabled]="!addressForm.valid">Submit</button>
-  </form>
+<table>
+    <thead>
+        <tr>
+            <th>Dátum</th>
+            <th>Mennyiség</th>
+            <th>Leolvasó azonosítója</th>
+            <th>Lehetőségek</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of data">
+            <td>{{ item.date }}</td>
+            <td>{{ item.amount }}</td>
+            <td>{{ item.reader }}</td>
+            <td>
+                <button (click)="modifyItem(item)">Modify</button>
+                <button (click)="deleteItem(item)">Delete</button>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <form [formGroup]="readingForm" (ngSubmit)="createReading()">
+                    <input type="date" formControlName="date" id="date">
+                    <input type="number" formControlName="amount" id="amount">
+                    {{reader}}
+                    <button type="submit">Save</button>
+                </form>
+            </td>
+        </tr>
+    </tbody>
+</table>

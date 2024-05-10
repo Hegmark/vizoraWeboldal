@@ -10,7 +10,7 @@ export class AuthGuard implements CanActivate {
   constructor(private auth: AuthService, private router: Router) {}
 
   canActivate(): boolean {
-    if(sessionStorage.getItem("uid") !== null){
+    if(sessionStorage.getItem("uid") !== null && this.auth.loggedIn$){
       return true
     }
     return false;

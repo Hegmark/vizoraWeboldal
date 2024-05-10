@@ -1,6 +1,8 @@
 import { Component, Input  } from '@angular/core';
 import { NgFor } from '@angular/common';
-import { Reading } from '../../models/readingInterface';
+import { Router } from '@angular/router';
+import { Address } from '../../models/addressInterface';
+import { DataTransferService } from '../../services/DataTransfer/data-transfer.service';
 
 @Component({
   selector: 'app-address-list',
@@ -11,6 +13,11 @@ import { Reading } from '../../models/readingInterface';
 })
 export class AddressListComponent {
 
-    @Input() data?: Array<Reading> = [];
+    @Input() data?: Array<Address> = [];
+    constructor(private router: Router, private carrier: DataTransferService) { }
 
+    manageAddress(address:any){
+      this.carrier.setSharedData(address);
+      this.router.navigate(['reader-data']);
+    }
 }

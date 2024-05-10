@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Reading } from '../../models/readingInterface';
 import { User } from '../../models/userInterface';
-import { simpleUser } from '../../models/simpleUserInterface';
+import { Address } from '../../models/addressInterface';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class DAOService {
 
 
   createReading(reading: Reading) {
-    this.afs.collection<Reading>("Readings").add(reading);
+    this.afs.collection<Reading>("readings").add(reading);
   }
 
   modifyReading(reading: Reading) {
@@ -24,8 +25,8 @@ export class DAOService {
 
   }
 
-  getAllReadings() {
-    return this.afs.collection<Reading>("Readings").valueChanges();
+  getAllAddresses() {
+    return this.afs.collection<Address>("addresses").valueChanges();
   }
 
   getReadingsByUser(user: User) {
@@ -47,7 +48,6 @@ export class DAOService {
             lastName: users[0].lastName,
             uid: users[0].uid
           }
-          console.log(user)
           return user;
         } else {
           return false;
@@ -57,5 +57,15 @@ export class DAOService {
 
   async createUser(user: User) {
     this.afs.collection('users').doc(user.uid).set(user);
+  }
+
+  async createAddress(address: Address): Promise<boolean | string> {
+    try {
+      await this.afs.collection('addresses').add(address);
+      return true;
+    } catch (error:any) {
+      console.log('Error saving address:', error);
+      return error.message;
+    }
   }
 }
