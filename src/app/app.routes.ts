@@ -12,7 +12,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { AuthGuard } from './services/guard/guard.guard';
 
 export const routes: Routes = [
-    { path: '', redirectTo: '/home', pathMatch: 'full' },
+    { path: '', redirectTo: '/home', pathMatch: 'full'},
     { path: 'home', component: InitialComponent },
     { path: 'reader-login', component: ReaderLoginComponent },
     { path: 'reader-register', component: ReaderRegistComponent },

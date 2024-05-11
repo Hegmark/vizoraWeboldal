@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AddressDataComponent } from '../../components/address-data/address-data.component';
 import { DAOService } from '../../services/DAO/dao.service';
-import { DataTransferService } from '../../services/DataTransfer/data-transfer.service';
 import { Address } from '../../models/addressInterface';
 import { NgIf } from '@angular/common';
 import { Reading } from '../../models/readingInterface';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-reader-data',
@@ -15,15 +15,22 @@ import { Reading } from '../../models/readingInterface';
 })
 export class ReaderDataComponent implements OnInit{
   public address?:Address;
-  public readings:Array<Reading> =[];
+  public readings:any;
+  private id:string ='';
 
-  constructor(private dao: DAOService, private carrier:DataTransferService){}
+  constructor(private dao: DAOService, private route: ActivatedRoute){
+    this.route.params.subscribe(params => {
+      this.id = params['addressId'];
+    })
+  }
 
   ngOnInit(): void {
-    this.address = this.carrier.getSharedData();
-    this.readings[0] = {date: new Date, amount: 10, reader:"ASD",address: this.address as Address}
-    this.readings[1] = {date: new Date, amount: 12, reader:"ASD",address: this.address as Address}
-    this.readings[2] = {date: new Date, amount: 13, reader:"ASD",address: this.address as Address}
+    this.dao.getAddressById(this.id).subscribe((address) => {this.address = address as Address;
+      this.dao.getReadingsByAddress(this.address as Address).subscribe((readings) => {
+        this.readings = readings;
+      });
+    })
+    
   }
 
   createReading($event:Reading){

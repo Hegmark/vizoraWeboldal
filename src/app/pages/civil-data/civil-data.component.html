@@ -1,1 +1,15 @@
-<p>civil-data works!</p>
+<div class="container">
+    <div class="left-side" *ngIf="address">
+        <h2>Cím adatai</h2>
+        <p><strong>Code:</strong> {{ address.code }}</p>
+        <p><strong>City Name:</strong> {{ address.cityName }}</p>
+        <p><strong>Street:</strong> {{ address.street }}</p>
+        <p><strong>House Number:</strong> {{ address.houseNumber }}</p>
+        <p *ngIf="address.apartment"><strong>Apartment:</strong> {{ address.apartment }}</p>
+    </div>
+
+
+    <div class="right-side">
+        <app-address-data (ReadingEmitter)="createReading($event)" [data]="readings" [address]="address"></app-address-data>
+    </div>
+</div>

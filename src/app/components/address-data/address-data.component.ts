@@ -1,27 +1,35 @@
 import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormControl, FormGroup, Validators, NgModel } from '@angular/forms';
 import { Reading } from '../../models/readingInterface';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { DAOService } from '../../services/DAO/dao.service';
 import { Address } from '../../models/addressInterface';
 
 @Component({
   selector: 'app-address-data',
   standalone: true,
-  imports: [ReactiveFormsModule, NgFor],
+  imports: [ReactiveFormsModule, NgFor, NgIf],
   templateUrl: './address-data.component.html',
   styleUrl: './address-data.component.css'
 })
 export class AddressDataComponent implements OnInit {
 
+
   public reader: string = 'civil';
+  public underModificationId: string = '0';
 
   @Output() ReadingEmitter = new EventEmitter<Reading>();
   @Input() data?: Array<Reading> = [];
   @Input() address?: Address = undefined;
 
   newReading?: Reading = undefined;
+
   readingForm = new FormGroup({
+    date: new FormControl<Date>(new Date, Validators.required),
+    amount: new FormControl<number>(0, [Validators.required, Validators.min(0)])
+  })
+
+  readingFormMod = new FormGroup({
     date: new FormControl<Date>(new Date, Validators.required),
     amount: new FormControl<number>(0, [Validators.required, Validators.min(0)])
   })
@@ -34,10 +42,16 @@ export class AddressDataComponent implements OnInit {
     }
   }
 
-  modifyItem(item: any) {
+  modifyItem(item: Reading) {
+    this.underModificationId = item.id as string;
+    this.readingFormMod.patchValue({
+      date: item.date,
+      amount: item.amount
+    });
   }
 
-  deleteItem(item: any) {
+  deleteItem(item: Reading) {
+    this.dao.deleteReading(item);
   }
 
   createReading() {
@@ -48,5 +62,20 @@ export class AddressDataComponent implements OnInit {
       address: this.address as Address
     }
     this.ReadingEmitter.emit(reading);
+  }
+
+  saveChanges() {
+    const reading: Reading = {
+      date: this.readingFormMod.get("date")?.value as Date,
+      amount: this.readingFormMod.get("amount")?.value as number,
+      reader: this.reader as string,
+      address: this.address as Address,
+      id: this.underModificationId
+    }
+    this.dao.modifyReading(reading);
+    this.underModificationId = '0';
+  }
+  cancelModify() {
+    this.underModificationId = '0';
   }
 }

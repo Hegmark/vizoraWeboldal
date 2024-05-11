@@ -2,7 +2,7 @@ import { Component, Input  } from '@angular/core';
 import { NgFor } from '@angular/common';
 import { Router } from '@angular/router';
 import { Address } from '../../models/addressInterface';
-import { DataTransferService } from '../../services/DataTransfer/data-transfer.service';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-address-list',
@@ -14,10 +14,13 @@ import { DataTransferService } from '../../services/DataTransfer/data-transfer.s
 export class AddressListComponent {
 
     @Input() data?: Array<Address> = [];
-    constructor(private router: Router, private carrier: DataTransferService) { }
+    constructor(private router: Router, private auth:AuthService) { }
 
     manageAddress(address:any){
-      this.carrier.setSharedData(address);
-      this.router.navigate(['reader-data']);
+      if(this.auth.isLoggedIn()){
+        this.router.navigate(['reader-data', {addressId: address.id}]);
+      }else{
+        this.router.navigate(['civil-data', {addressId: address.id}]);
+      }
     }
 }

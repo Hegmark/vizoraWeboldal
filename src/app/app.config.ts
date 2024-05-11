@@ -11,7 +11,6 @@ import { AngularFireModule } from '@angular/fire/compat';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes),
-  provideClientHydration(),
   importProvidersFrom(AngularFireModule.initializeApp({
     "projectId": "vizora-weboldal",
     "appId": "1:440355443959:web:be3aa20368776e9888eff2",
