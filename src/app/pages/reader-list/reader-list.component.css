@@ -1,0 +1,10 @@
+button {
+    background-color: #00796B;
+    color: white;
+    border-color: white;
+    border-radius: 15px;
+    width: 20vw;
+    display: flex;  
+    align-items: center;
+    justify-content: center;
+  }

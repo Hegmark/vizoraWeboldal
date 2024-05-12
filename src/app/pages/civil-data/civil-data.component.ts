@@ -37,5 +37,4 @@ export class CivilDataComponent implements OnInit {
   createReading($event: Reading) {
     this.dao.createReading($event);
   }
-
 }

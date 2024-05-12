@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  
+  .left-side {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    color: white;
+    background-color: #00796B;
+  }
+  
+  .right-side {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    background-color: #00796B;
+    color: white;
+  }

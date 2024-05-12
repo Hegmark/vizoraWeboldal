@@ -3,11 +3,12 @@ import { AddressListComponent } from '../../components/address-list/address-list
 import { DAOService } from '../../services/DAO/dao.service';
 import { Router } from '@angular/router';
 import { Address } from '../../models/addressInterface';
+import { BarComponent } from '../../components/bar/bar/bar.component';
 
 @Component({
   selector: 'app-reader-list',
   standalone: true,
-  imports: [AddressListComponent],
+  imports: [AddressListComponent, BarComponent],
   templateUrl: './reader-list.component.html',
   styleUrl: './reader-list.component.css'
 })

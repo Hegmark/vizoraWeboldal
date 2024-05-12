@@ -1,10 +1,18 @@
-.button-container {
-    text-align: center;
-  }
-  
-  .button-container button {
-    margin: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-  }
+
+.button-container button {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button {
+  background-color: #00796B;
+  color: white;
+  border-color: white;
+  border-radius: 15px;
+  width: 20vw;
+  display: flex;  
+  align-items: center;
+  justify-content: center;
+}

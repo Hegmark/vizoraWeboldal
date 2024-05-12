@@ -13,6 +13,7 @@ export class AuthGuard implements CanActivate {
     if(sessionStorage.getItem("uid") !== null && this.auth.loggedIn$){
       return true
     }
+    this.router.navigate(['/home']);
     return false;
   }
 } 

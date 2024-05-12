@@ -14,15 +14,15 @@ export class DAOService {
 
   createReading(reading: Reading) {
     reading.id = this.afs.createId();
-    this.afs.collection<Reading>("readings").doc(reading.id).set(reading);
+    return this.afs.collection<Reading>("readings").doc(reading.id).set(reading);
   }
 
   modifyReading(reading: Reading) {
-    this.afs.collection('readings').doc(reading.id).update(reading);
+    return this.afs.collection('readings').doc(reading.id).update(reading);
   }
 
   deleteReading(reading: Reading) {
-    this.afs.collection('readings').doc(reading.id).delete();
+    return this.afs.collection('readings').doc(reading.id).delete();
   }
 
   getAllAddresses() {

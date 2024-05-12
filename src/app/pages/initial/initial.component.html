@@ -1,5 +1,11 @@
 <div class="button-container">
-    <button (click)="civilListNavigate()">Button 1</button>
-    <button (click)="readerLoginNavigate()">Button 2</button>
+    <button (click)="civilListNavigate()" mat-flat-icon-button  matTooltip="Civil bejelentés beadása">
+        <mat-icon>person</mat-icon>
+        Civil bejelentés
+    </button>
+    <button (click)="readerLoginNavigate()" mat-flat-icon-button matTooltip="Bejelentkezés hivatásos leolvasók számára">
+        <mat-icon>engineering</mat-icon>
+        Leolvasó bejelentkezés
+    </button>
 </div>
-<router-outlet/>
+<router-outlet />

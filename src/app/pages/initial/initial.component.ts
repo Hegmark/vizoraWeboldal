@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { RouterOutlet } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon'
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-initial',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, MatButtonModule, MatIconModule,MatTooltipModule],
   templateUrl: './initial.component.html',
   styleUrl: './initial.component.css'
 })
@@ -13,8 +16,6 @@ export class InitialComponent {
 
   constructor(private router: Router) { }
 
-  ngOnInit(): void {
-  }
 
   civilListNavigate() {
     this.router.navigate(['civil-list']);

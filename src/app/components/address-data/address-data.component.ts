@@ -1,22 +1,25 @@
 import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
-import { ReactiveFormsModule, FormControl, FormGroup, Validators, NgModel } from '@angular/forms';
+import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Reading } from '../../models/readingInterface';
-import { NgFor, NgIf } from '@angular/common';
+import {  NgFor, NgIf} from '@angular/common';
 import { DAOService } from '../../services/DAO/dao.service';
 import { Address } from '../../models/addressInterface';
+import { provideNativeDateAdapter } from '@angular/material/core';
+
 
 @Component({
   selector: 'app-address-data',
   standalone: true,
-  imports: [ReactiveFormsModule, NgFor, NgIf],
+  providers: [provideNativeDateAdapter()],
+  imports: [ReactiveFormsModule, NgFor, NgIf ],
   templateUrl: './address-data.component.html',
   styleUrl: './address-data.component.css'
 })
 export class AddressDataComponent implements OnInit {
 
-
-  public reader: string = 'civil';
+  public reader: string = 'Civil bejelentés';
   public underModificationId: string = '0';
+  public selectedDate?:Date;
 
   @Output() ReadingEmitter = new EventEmitter<Reading>();
   @Input() data?: Array<Reading> = [];
@@ -35,6 +38,7 @@ export class AddressDataComponent implements OnInit {
   })
 
   constructor(private dao: DAOService) { }
+
   ngOnInit(): void {
     const uid: string = sessionStorage.getItem("uid") as string;
     if (uid) {
@@ -61,8 +65,10 @@ export class AddressDataComponent implements OnInit {
       reader: this.reader as string,
       address: this.address as Address
     }
+    console.log(reading)
     this.ReadingEmitter.emit(reading);
   }
+
 
   saveChanges() {
     const reading: Reading = {
@@ -78,4 +84,5 @@ export class AddressDataComponent implements OnInit {
   cancelModify() {
     this.underModificationId = '0';
   }
+
 }

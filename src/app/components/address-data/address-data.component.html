@@ -1,10 +1,10 @@
-<ng-container *ngIf="reader !== 'civil'; else civil">
-    <table>
-        <thead>
+<ng-container *ngIf="reader !== 'Civil bejelentés'; else civil">
+    <table class="table">
+        <thead class="header">
             <tr>
                 <th>Dátum</th>
                 <th>Mennyiség</th>
-                <th>Leolvasó azonosítója</th>
+                <th>Bejelentő azonosítója</th>
                 <th>Lehetőségek</th>
             </tr>
         </thead>
@@ -21,22 +21,21 @@
                 </ng-container>
                 <ng-template #modifyForm>
                     <td colspan="3">
-                        <form [formGroup]="readingFormMod">
+                        <form [formGroup]="readingFormMod" class="new">
                             <input type="date" formControlName="date" id="date">
                             <input type="number" formControlName="amount" id="amount">
-                            {{reader}}
                         </form>
                     </td>
-                    <button (click)="saveChanges()">Save</button>
-                    <button (click)="cancelModify()">Cancel</button>
+                    <td><button (click)="saveChanges()">Save</button>
+                        <button (click)="cancelModify()">Cancel</button>
+                    </td>
                 </ng-template>
             </tr>
             <tr>
                 <td colspan="4">
-                    <form [formGroup]="readingForm" (ngSubmit)="createReading()">
+                    <form [formGroup]="readingForm" (ngSubmit)="createReading()" class="new">
                         <input type="date" formControlName="date" id="date">
                         <input type="number" formControlName="amount" id="amount">
-                        {{reader}}
                         <button type="submit">Save</button>
                     </form>
                 </td>
@@ -45,42 +44,31 @@
     </table>
 </ng-container>
 <ng-template #civil>
-    <table>
-        <thead>
+    <table class="table">
+        <thead class="header">
             <tr>
                 <th>Dátum</th>
                 <th>Mennyiség</th>
-                <th>Leolvasó azonosítója</th>
+                <th>Bejelentő azonosítója</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let item of data">
-                <ng-container *ngIf="item.id !== underModificationId; else modifyForm">
+                <ng-container>
                     <td>{{ item.date }}</td>
                     <td>{{ item.amount }}</td>
                     <td>{{ item.reader }}</td>
                 </ng-container>
-                <ng-template #modifyForm>
-                    <td colspan="3">
-                        <form [formGroup]="readingFormMod">
-                            <input type="date" formControlName="date" id="date">
-                            <input type="number" formControlName="amount" id="amount">
-                            {{reader}}
-                        </form>
-                    </td>
-                    <button (click)="saveChanges()">Save</button>
-                    <button (click)="cancelModify()">Cancel</button>
-                </ng-template>
             </tr>
             <tr>
-                <td colspan="4">
-                    <form [formGroup]="readingForm" (ngSubmit)="createReading()">
+                <td colspan="3">
+                    <form [formGroup]="readingForm" (ngSubmit)="createReading()" class="new" >
                         <input type="date" formControlName="date" id="date">
                         <input type="number" formControlName="amount" id="amount">
-                        {{reader}}
                         <button type="submit">Save</button>
                     </form>
                 </td>
+
             </tr>
         </tbody>
     </table>

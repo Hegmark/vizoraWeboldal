@@ -5,15 +5,17 @@
   }
   
   .left-side {
-    width: 45%;
     padding: 20px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 15px;
+    color: white;
+    background-color: #00796B;
   }
   
   .right-side {
-    width: 45%;
     padding: 20px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 15px;
+    background-color: #00796B;
+    color: white;
   }

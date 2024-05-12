@@ -3,12 +3,13 @@ import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angula
 import { RouterOutlet, Router } from '@angular/router';
 import { Address } from '../../models/addressInterface';
 import { DAOService } from '../../services/DAO/dao.service';
+import { BarComponent } from '../../components/bar/bar/bar.component';
 
 
 @Component({
   selector: 'app-address-register',
   standalone: true,
-  imports: [RouterOutlet, ReactiveFormsModule],
+  imports: [RouterOutlet, ReactiveFormsModule, BarComponent],
   templateUrl: './address-register.component.html',
   styleUrl: './address-register.component.css'
 })

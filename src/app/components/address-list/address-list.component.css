@@ -12,3 +12,18 @@
   .table th {
     background-color: #f2f2f2;
   }
+
+  button {
+    background-color: #00796B;
+    color: white;
+    border-color: white;
+    border-radius: 15px;
+    width: 10vw;
+    display: flex;  
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card{
+    background-color: #4DD0E1;
+  }
